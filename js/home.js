@@ -117,9 +117,9 @@ function initHeroAnimation() {
 
   const tl = gsap.timeline({ delay: 0.5 });
 
-  // 1. Book cover flips open
+  // 1. Book cover flips open (upward)
   tl.to(cover, {
-    rotateY: -160,
+    rotateX: 160,
     duration: 1.8,
     ease: 'power3.inOut'
   });
