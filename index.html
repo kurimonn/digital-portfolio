@@ -677,6 +677,59 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* Responsive — Hero Book & Works Book */
+    @media (max-width: 1024px) {
+      .hero-book {
+        width: 520px;
+        height: 380px;
+        margin-left: 150px;
+      }
+      .hero-book__cover-logo { width: 70px; }
+      .hero-book__page-content { padding: 24px; }
+      .book-wrapper { height: 450px; }
+      .book { width: 380px; height: 450px; }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        min-height: 100vh;
+        padding: 80px 0 40px;
+      }
+      .hero-book {
+        width: 320px;
+        max-width: 90vw;
+        height: 400px;
+        margin-left: 0;
+      }
+      .hero-book__cover-logo { width: 50px; }
+      .hero-book__page-content { padding: 20px 16px; }
+      .hero__label { font-size: 0.6rem; margin-bottom: 12px; }
+      .hero__title { font-size: 1.8rem !important; }
+      .hero__subtitle { font-size: 0.85rem; margin: 0 auto 20px; }
+      .hero__cta { gap: 10px; }
+      .hero__cta .btn { padding: 10px 18px; font-size: 0.75rem; }
+      .scroll-indicator { bottom: 16px; }
+      .book-wrapper { height: 380px; }
+      .book { width: 280px; height: 380px; }
+      .book__page-front, .book__page-back { padding: 20px; }
+      .book__spine { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-book {
+        width: 280px;
+        height: 370px;
+      }
+      .hero-book__page-content { padding: 14px; }
+      .hero__title { font-size: 1.5rem !important; }
+      .hero__subtitle { font-size: 0.8rem; margin: 0 auto 16px; }
+      .hero__label { font-size: 0.55rem; }
+      .hero__label::before, .hero__label::after { width: 16px; }
+      .book-wrapper { height: 340px; }
+      .book { width: 240px; height: 340px; }
+      .book__page-front, .book__page-back { padding: 14px; }
+    }
   </style>
 </head>
 <body>
