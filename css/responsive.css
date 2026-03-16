@@ -20,6 +20,31 @@
     width: 80vw;
     height: 400px;
   }
+
+  /* Hero book */
+  .hero-book {
+    width: 520px;
+    height: 380px;
+    margin-left: 150px;
+  }
+
+  .hero-book__cover-logo {
+    width: 70px;
+  }
+
+  .hero-book__page-content {
+    padding: 24px;
+  }
+
+  /* Works book */
+  .book-wrapper {
+    height: 450px;
+  }
+
+  .book {
+    width: 380px;
+    height: 450px;
+  }
 }
 
 /* Mobile */
@@ -59,13 +84,62 @@
     margin-bottom: 40px;
   }
 
-  /* Hero adjustments */
+  /* Hero book mobile */
+  .hero-book {
+    width: 340px;
+    max-width: 95vw;
+    height: 420px;
+    margin-left: 0;
+  }
+
+  .hero-book__cover-logo {
+    width: 60px;
+  }
+
+  .hero-book__page-content {
+    padding: 20px;
+  }
+
   .hero__title {
-    font-size: clamp(2rem, 10vw, 3.5rem);
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
   }
 
   .hero__subtitle {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    margin: 0 auto 24px;
+  }
+
+  .hero__label {
+    font-size: 0.65rem;
+    margin-bottom: 16px;
+  }
+
+  .hero__cta .btn {
+    padding: 10px 20px;
+    font-size: 0.75rem;
+  }
+
+  /* Works book mobile */
+  .book-wrapper {
+    height: 400px;
+  }
+
+  .book {
+    width: 300px;
+    height: 400px;
+  }
+
+  .book__page-front,
+  .book__page-back {
+    padding: 24px;
+  }
+
+  .book__page-content h3 {
+    font-size: 1.2rem;
+  }
+
+  .book__page-content p {
+    font-size: 0.8rem;
   }
 
   /* Grid adjustments */
@@ -184,6 +258,57 @@
 
   .nav__mobile-menu .nav__link {
     font-size: 1.5rem;
+  }
+
+  .nav__logo-text {
+    font-size: 0.75rem;
+  }
+
+  .nav__logo-img {
+    height: 40px;
+  }
+
+  /* Hero book small */
+  .hero-book {
+    width: 290px;
+    height: 380px;
+  }
+
+  .hero__title {
+    font-size: 1.6rem;
+  }
+
+  .hero__subtitle {
+    font-size: 0.8rem;
+    margin: 0 auto 16px;
+  }
+
+  .hero-book__page-content {
+    padding: 16px;
+  }
+
+  /* Works book small */
+  .book-wrapper {
+    height: 350px;
+  }
+
+  .book {
+    width: 250px;
+    height: 350px;
+  }
+
+  .book__page-front,
+  .book__page-back {
+    padding: 16px;
+  }
+
+  .book__nav {
+    gap: 8px;
+  }
+
+  /* Project detail gallery */
+  .project-gallery {
+    grid-template-columns: 1fr;
   }
 }
 
