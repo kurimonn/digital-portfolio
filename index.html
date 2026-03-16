@@ -251,18 +251,18 @@
     /* Book Flip Component */
     .book-wrapper {
       position: relative;
-      max-width: 800px;
+      max-width: 1100px;
       margin: 0 auto;
       height: 560px;
       padding: 20px 0;
     }
 
     .book {
-      position: relative;
-      margin: 0 auto;
-      width: 100%;
-      max-width: 800px;
-      height: 500px;
+      position: absolute;
+      left: 50%;
+      top: 20px;
+      width: 480px;
+      height: 560px;
       perspective: 2500px;
     }
 
@@ -273,13 +273,13 @@
       width: 100%;
       height: 100%;
       transform-style: preserve-3d;
-      transform-origin: center top;
+      transform-origin: left center;
       transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
       cursor: pointer;
     }
 
     .book__page.flipped {
-      transform: rotateX(-180deg);
+      transform: rotateY(-180deg);
       z-index: 1;
     }
 
@@ -303,35 +303,35 @@
     }
 
     .book__page-front {
-      border-radius: var(--radius-lg);
-      box-shadow: 0 4px 20px rgba(44, 44, 44, 0.15);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      box-shadow: 4px 4px 20px rgba(44, 44, 44, 0.15);
     }
 
     .book__page-back {
-      transform: rotateX(180deg);
-      border-radius: var(--radius-lg);
-      box-shadow: 0 -4px 20px rgba(44, 44, 44, 0.15);
+      transform: rotateY(180deg);
+      border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+      box-shadow: -4px 4px 20px rgba(44, 44, 44, 0.15);
     }
 
-    /* Page edge — top side */
+    /* Page edge — spine side */
     .book__page-front::after {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.08), transparent);
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to right, rgba(0,0,0,0.08), transparent);
     }
 
     .book__page-back::after {
       content: '';
       position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(to top, rgba(0,0,0,0.08), transparent);
+      top: 0;
+      right: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to left, rgba(0,0,0,0.08), transparent);
     }
 
     .book__page-overlay {
@@ -385,9 +385,23 @@
       line-height: 1.6;
     }
 
-    /* Spine shadow at top */
+    /* Spine shadow at center */
     .book__spine {
-      display: none;
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 560px;
+      background: linear-gradient(to right,
+        transparent,
+        rgba(0,0,0,0.04) 25%,
+        rgba(0,0,0,0.1) 50%,
+        rgba(0,0,0,0.04) 75%,
+        transparent
+      );
+      z-index: 100;
+      pointer-events: none;
     }
 
     /* Page number */
@@ -412,12 +426,13 @@
     /* Turn hint */
     .book__page-hint {
       position: absolute;
-      bottom: 16px;
-      left: 50%;
-      transform: translateX(-50%);
+      top: 50%;
+      right: 16px;
+      transform: translateY(-50%);
       font-family: var(--font-ui);
       font-size: 0.65rem;
       color: rgba(255,255,255,0.35);
+      writing-mode: vertical-rl;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       z-index: 2;
@@ -695,7 +710,11 @@
       .hero__cta .btn { padding: 10px 18px; font-size: 0.75rem; }
       .scroll-indicator { bottom: 16px; }
       .book-wrapper { height: 380px; }
-      .book { width: 100%; height: 380px; }
+      .book { position: relative; left: auto; width: 100%; height: 380px; }
+      .book__page { transform-origin: center top; }
+      .book__page.flipped { transform: rotateX(-180deg); }
+      .book__page-front { border-radius: var(--radius-lg); }
+      .book__page-back { transform: rotateX(180deg); border-radius: var(--radius-lg); }
       .book__page-front, .book__page-back { padding: 20px; }
       .book__spine { display: none; }
     }
@@ -712,7 +731,7 @@
       .hero__label { font-size: 0.55rem; }
       .hero__label::before, .hero__label::after { width: 16px; }
       .book-wrapper { height: 300px; }
-      .book { width: 100%; height: 300px; }
+      .book { position: relative; left: auto; width: 100%; height: 300px; }
       .book__page-front, .book__page-back { padding: 14px; }
     }
   </style>
