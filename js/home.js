@@ -119,7 +119,7 @@ function initHeroAnimation() {
 
   // 1. Book cover flips open (upward)
   tl.to(cover, {
-    rotateX: 160,
+    rotateX: -160,
     duration: 1.8,
     ease: 'power3.inOut'
   });
