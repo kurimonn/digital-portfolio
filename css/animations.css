@@ -1,0 +1,617 @@
+/* ===========================
+   Keyframe Animations — Book Theme
+   =========================== */
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Page turn feel */
+@keyframes pageTurn {
+  0% { transform: rotateY(-5deg); opacity: 0; }
+  100% { transform: rotateY(0deg); opacity: 1; }
+}
+
+/* Gradient shift */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Scroll indicator bounce */
+@keyframes scrollBounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+  40% { transform: translateY(10px) translateX(-50%); }
+  60% { transform: translateY(5px) translateX(-50%); }
+}
+
+/* Spin */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Dash animation for SVG */
+@keyframes dash {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Shimmer loading effect */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Text reveal — book page style */
+@keyframes textReveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+/* Scale in */
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Slide up */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Leaf sway */
+@keyframes leafSway {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg); }
+  75% { transform: rotate(-3deg); }
+}
+
+/* Line draw */
+@keyframes lineDraw {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* ===========================
+   Hover Animations
+   =========================== */
+
+/* Magnetic button effect container */
+.magnetic-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Card 3D tilt */
+.tilt-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.1s ease-out;
+}
+
+.tilt-card__inner {
+  transform: translateZ(30px);
+}
+
+/* Image zoom on hover */
+.img-zoom {
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.img-zoom img {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.img-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* Underline animation — ink style */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ===========================
+   Stagger Children
+   =========================== */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* ===========================
+   Number counter styles
+   =========================== */
+.counter {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: var(--green-deep);
+}
+
+/* ===========================
+   Progress bar animation — Ink fill
+   =========================== */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--bg-secondary);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.progress-bar__fill {
+  height: 100%;
+  background: var(--gradient-accent);
+  border-radius: 100px;
+  width: 0;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===========================
+   Carousel styles — Book shelf
+   =========================== */
+.carousel {
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel__track {
+  display: flex;
+  gap: 24px;
+  cursor: grab;
+  user-select: none;
+  padding: 20px 0;
+}
+
+.carousel__track:active {
+  cursor: grabbing;
+}
+
+.carousel__card {
+  flex-shrink: 0;
+  width: 70vw;
+  max-width: 800px;
+  height: 480px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-color);
+}
+
+.carousel__card:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-medium);
+}
+
+.carousel__card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel__card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(61, 90, 64, 0.8), transparent);
+}
+
+.carousel__card-content {
+  position: relative;
+  z-index: 1;
+}
+
+.carousel__card-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.carousel__card-desc {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 12px;
+}
+
+/* ===========================
+   Masonry grid
+   =========================== */
+.masonry {
+  columns: 3;
+  column-gap: 20px;
+}
+
+.masonry__item {
+  break-inside: avoid;
+  margin-bottom: 20px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-color);
+}
+
+.masonry__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(61, 90, 64, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.masonry__item:hover .masonry__overlay {
+  opacity: 1;
+}
+
+.masonry__item:hover img {
+  transform: scale(1.05);
+}
+
+.masonry__item img {
+  width: 100%;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===========================
+   Timeline — Chapter markers
+   =========================== */
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--green-mint);
+}
+
+.timeline__item {
+  position: relative;
+  padding-bottom: 48px;
+}
+
+.timeline__dot {
+  position: absolute;
+  left: -46px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg-primary);
+  box-shadow: 0 0 0 3px var(--green-mint);
+}
+
+.timeline__date {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.timeline__title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--green-deep);
+}
+
+.timeline__desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ===========================
+   Contact form — Ink & paper
+   =========================== */
+.form-group {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.form-group__input,
+.form-group__textarea {
+  width: 100%;
+  padding: 16px 0;
+  font-size: 1rem;
+  background: transparent;
+  border-bottom: 1.5px solid var(--border-color);
+  transition: border-color var(--transition-normal);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}
+
+.form-group__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-group__label {
+  position: absolute;
+  left: 0;
+  top: 16px;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: all var(--transition-normal);
+}
+
+.form-group__input:focus ~ .form-group__label,
+.form-group__input:not(:placeholder-shown) ~ .form-group__label,
+.form-group__textarea:focus ~ .form-group__label,
+.form-group__textarea:not(:placeholder-shown) ~ .form-group__label {
+  top: -8px;
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.form-group__input:focus,
+.form-group__textarea:focus {
+  border-color: var(--accent);
+}
+
+.form-group__line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width var(--transition-normal);
+}
+
+.form-group__input:focus ~ .form-group__line,
+.form-group__textarea:focus ~ .form-group__line {
+  width: 100%;
+}
+
+/* ===========================
+   1. Page Curl Hover — Cards
+   =========================== */
+.page-curl {
+  position: relative;
+}
+
+/* The curl corner is a real DOM element injected by JS */
+.curl-corner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  z-index: 10;
+  pointer-events: none;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Shadow layer under the fold */
+.curl-corner__shadow {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    225deg,
+    rgba(107, 143, 113, 0.15) 0%,
+    rgba(107, 143, 113, 0.05) 45%,
+    transparent 50%
+  );
+}
+
+/* The folded triangle */
+.curl-corner__fold {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0;
+  border-color: transparent transparent var(--bg-primary) transparent;
+  filter: drop-shadow(-2px -2px 3px rgba(0, 0, 0, 0.1));
+  transition: border-width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-curl:hover .curl-corner {
+  width: 55px;
+  height: 55px;
+}
+
+.page-curl:hover .curl-corner__fold {
+  border-width: 0 0 55px 55px;
+}
+
+/* ===========================
+   2. Ink Spread Hover — Buttons
+   =========================== */
+.ink-spread {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.ink-spread::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: var(--green-deep);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.ink-spread:hover::before {
+  width: 400px;
+  height: 400px;
+}
+
+/* Primary button ink — lighter ink on dark bg */
+.btn--primary.ink-spread::before {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Outline button ink — fills with accent */
+.btn--outline.ink-spread::before {
+  background: var(--accent);
+}
+
+.btn--outline.ink-spread:hover {
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* PDF link ink */
+.project-pdf.ink-spread::before {
+  background: var(--accent);
+}
+
+.project-pdf.ink-spread:hover {
+  color: #fff;
+}
+
+/* ===========================
+   4. Card Image Zoom + Overlay
+   =========================== */
+.card-hover-zoom .card__image {
+  overflow: hidden;
+  position: relative;
+}
+
+.card-hover-zoom .card__image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(61, 90, 64, 0);
+  transition: background 0.5s ease;
+  z-index: 1;
+}
+
+.card-hover-zoom:hover .card__image::after {
+  background: rgba(61, 90, 64, 0.25);
+}
+
+.card-hover-zoom .masonry__placeholder,
+.card-hover-zoom .card__image-inner {
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover-zoom:hover .masonry__placeholder,
+.card-hover-zoom:hover .card__image-inner {
+  transform: scale(1.08);
+}
+
+/* Design page masonry zoom */
+.masonry__item .masonry__placeholder {
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.masonry__item:hover .masonry__placeholder {
+  transform: scale(1.06);
+}
+
+/* ===========================
+   5. Button Shine Sweep
+   =========================== */
+@keyframes shineSweep {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: none;
+}
+
+.btn-shine:hover::after {
+  animation: shineSweep 0.7s ease forwards;
+}

@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiriha Aiga — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Serif+4:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    /* ===== Home-specific styles ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(160deg, #d0e4be, #e0edcf, #e8f2dc);
+    }
+
+    .hero__shimmer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .hero__shimmer::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -100%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(
+        105deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.4) 45%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0.4) 55%,
+        transparent 70%
+      );
+      animation: shimmerWipe 6s ease-in-out infinite;
+    }
+
+    .hero__shimmer::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -100%;
+      width: 60%;
+      height: 200%;
+      background: linear-gradient(
+        105deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.2) 45%,
+        rgba(255, 255, 255, 0.35) 50%,
+        rgba(255, 255, 255, 0.2) 55%,
+        transparent 70%
+      );
+      animation: shimmerWipe 6s ease-in-out infinite 3s;
+    }
+
+    @keyframes shimmerWipe {
+      0% { left: -100%; }
+      100% { left: 150%; }
+    }
+
+    /* Hero Book */
+    .hero-book {
+      position: relative;
+      z-index: 1;
+      width: 680px;
+      max-width: 90vw;
+      height: 460px;
+      perspective: 2000px;
+      margin-left: 250px;
+    }
+
+    .hero-book__cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      z-index: 10;
+      transition: none;
+    }
+
+    .hero-book__cover-front {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      background: linear-gradient(135deg, #728d5c, #9ab888);
+      border-radius: 4px 12px 12px 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+    }
+
+    .hero-book__cover-logo {
+      width: 100px;
+      height: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+    }
+
+    .hero-book__cover-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      transform: rotateY(180deg);
+      background: linear-gradient(135deg, #5a7248, #728d5c);
+      border-radius: 12px 4px 4px 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-book__cover-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-book__pages {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-primary);
+      border-radius: 4px 12px 12px 4px;
+      box-shadow: 2px 4px 20px rgba(0,0,0,0.08);
+      border: 1px solid var(--border-color);
+    }
+
+    .hero-book__page-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      opacity: 0;
+      text-align: center;
+    }
+
+    .hero__label {
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .hero__label::before,
+    .hero__label::after {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero__title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      visibility: hidden;
+      color: var(--green-deep);
+    }
+
+    .hero__subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-secondary);
+      max-width: 550px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .hero__cta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: scrollBounce 2s infinite;
+    }
+
+    .scroll-indicator {
+      font-family: var(--font-ui);
+    }
+
+    .scroll-indicator__line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    /* Featured Projects Section */
+    .featured-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    /* Book Flip Component */
+    .book-wrapper {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 560px;
+      padding: 20px 0;
+    }
+
+    .book {
+      position: absolute;
+      left: 50%;
+      top: 20px;
+      width: 480px;
+      height: 560px;
+      perspective: 2500px;
+    }
+
+    .book__page {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transform-origin: left center;
+      transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+      cursor: pointer;
+    }
+
+    .book__page.flipped {
+      transform: rotateY(-180deg);
+      z-index: 1;
+    }
+
+    .book__page.flipped .book__page-back {
+      pointer-events: auto;
+    }
+
+    .book__page-front,
+    .book__page-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 48px;
+    }
+
+    .book__page-front {
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      box-shadow: 4px 4px 20px rgba(44, 44, 44, 0.15);
+    }
+
+    .book__page-back {
+      transform: rotateY(180deg);
+      border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+      box-shadow: -4px 4px 20px rgba(44, 44, 44, 0.15);
+    }
+
+    /* Page edge — spine side */
+    .book__page-front::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to right, rgba(0,0,0,0.08), transparent);
+    }
+
+    .book__page-back::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to left, rgba(0,0,0,0.08), transparent);
+    }
+
+    .book__page-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      pointer-events: none;
+    }
+
+    .book__page-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .book__page-content a {
+      position: relative;
+      z-index: 3;
+    }
+
+    .book__page-tag {
+      display: inline-block;
+      padding: 5px 14px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-ui);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+
+    .book__page-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .book__page-desc {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+    }
+
+    /* Spine shadow at center */
+    .book__spine {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 560px;
+      background: linear-gradient(to right,
+        transparent,
+        rgba(0,0,0,0.04) 25%,
+        rgba(0,0,0,0.1) 50%,
+        rgba(0,0,0,0.04) 75%,
+        transparent
+      );
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    /* Page number */
+    .book__page-number {
+      position: absolute;
+      bottom: 20px;
+      font-family: var(--font-ui);
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.1em;
+      z-index: 2;
+    }
+
+    .book__page-front .book__page-number {
+      right: 24px;
+    }
+
+    .book__page-back .book__page-number {
+      left: 24px;
+    }
+
+    /* Turn hint */
+    .book__page-hint {
+      position: absolute;
+      top: 50%;
+      right: 16px;
+      transform: translateY(-50%);
+      font-family: var(--font-ui);
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.35);
+      writing-mode: vertical-rl;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--transition-normal);
+    }
+
+    .book__page:not(.flipped):hover .book__page-hint {
+      opacity: 1;
+    }
+
+    /* Navigation arrows */
+    .book__nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .book__nav-btn {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      background: var(--bg-card);
+      transition: all var(--transition-normal);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .book__nav-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    .book__nav-btn:disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    .book__nav-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .book__nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green-mint);
+      transition: all var(--transition-normal);
+    }
+
+    .book__nav-dot.active {
+      background: var(--accent);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 1024px) {
+      .book {
+        width: 400px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .book-wrapper {
+        height: 440px;
+      }
+
+      .book {
+        width: 300px;
+        height: 440px;
+      }
+
+      .book__spine {
+        height: 440px;
+      }
+
+      .book__page-front,
+      .book__page-back {
+        padding: 28px;
+      }
+
+      .book__page-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .book-wrapper {
+        height: 380px;
+      }
+
+      .book {
+        width: 240px;
+        height: 380px;
+      }
+
+      .book__spine {
+        height: 380px;
+      }
+
+      .book__page-front,
+      .book__page-back {
+        padding: 20px;
+      }
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .skill-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      transition: all var(--transition-normal);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .skill-item:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .skill-item__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .skill-item__name {
+      font-family: var(--font-ui);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .skill-item__percent {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Category Cards */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .category-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 48px 32px;
+      text-align: center;
+      transition: all 0.3s ease-out;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .category-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--green-pale);
+      opacity: 0;
+      transition: opacity var(--transition-normal);
+    }
+
+    .category-card:hover::before {
+      opacity: 0.5;
+    }
+
+    .category-card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .category-card__icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .category-card__title {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      position: relative;
+      color: var(--green-deep);
+    }
+
+    .category-card__desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .category-card__link {
+      position: relative;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .category-card__link span {
+      transition: transform var(--transition-fast);
+    }
+
+    .category-card:hover .category-card__link span {
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 768px) {
+      .categories-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-dot"></div>
+
+  <!-- Page Transition -->
+  <div class="page-transition"></div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav__logo"><img src="assets/images/logo/名称未設定-1.png" alt="Kiriha Aiga" class="nav__logo-img"><span class="nav__logo-text"><span>Kiriha</span><span>Aiga</span></span></a>
+    <div class="nav__links">
+      <a href="index.html" class="nav__link active">Home</a>
+      <a href="about.html" class="nav__link">About</a>
+    </div>
+    <button class="nav__hamburger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="nav__mobile-menu">
+    <a href="index.html" class="nav__link active">Home</a>
+    <a href="about.html" class="nav__link">About</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__shimmer"></div>
+    <div class="hero-book">
+      <!-- Cover (flips open) -->
+      <div class="hero-book__cover">
+        <div class="hero-book__cover-front">
+          <img src="assets/images/logo/名称未設定-1.png" alt="K" class="hero-book__cover-logo">
+        </div>
+        <div class="hero-book__cover-back">
+          <img src="assets/images/my%20photo/IMG_6313.png" alt="Kiriha Aiga">
+        </div>
+      </div>
+      <!-- Pages inside -->
+      <div class="hero-book__pages">
+        <div class="hero-book__page-content">
+          <span class="hero__label">UI/UX Designer &amp; Developer</span>
+          <h1 class="hero__title" style="visibility: visible;">Kiriha Aiga</h1>
+          <p class="hero__subtitle">Designing and building user-centered digital products through UI/UX, app development, and motion design.</p>
+          <div class="hero__cta">
+            <a href="#works" class="btn btn--primary magnetic-btn ink-spread btn-shine">
+              View Works
+              <span class="btn__arrow">→</span>
+            </a>
+            <a href="about.html" class="btn btn--outline magnetic-btn ink-spread">About Me</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-indicator__line"></div>
+    </div>
+  </section>
+
+  <!-- Works -->
+  <section class="section" id="works">
+    <div class="container">
+      <div class="featured-header reveal">
+        <div>
+          <span class="section__label">Projects</span>
+          <h2 class="section__title">Works</h2>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="book-wrapper">
+        <div class="book__spine"></div>
+        <div class="book" id="project-book">
+
+        <!--
+        === ORIGINAL ORDER (restore later) ===
+        Page 1: PrépaGo French / PrépaGo Japanese
+        Page 2: Nature Cycle / Brand Guidelines
+        Page 3: Brand Pitch / End of Chapter
+        === END ORIGINAL ORDER ===
+        -->
+
+        <!-- Page 1: Table of Contents / Nature Cycle -->
+        <div class="book__page" data-page="0">
+          <div class="book__page-front" style="background: var(--bg-secondary);">
+            <div class="book__page-content" style="width: 100%; align-self: center;">
+              <h3 class="book__page-title" style="color: var(--green-deep); margin-bottom: 24px;">Table of Contents</h3>
+              <div style="display: flex; flex-direction: column; gap: 16px;">
+                <p style="font-size: 1rem; color: var(--text-secondary); border-bottom: 1px solid var(--border-color); padding-bottom: 12px;"><span style="color: var(--green-deep); font-weight: 600;">01</span> &nbsp; Nature Cycle</p>
+                <p style="font-size: 1rem; color: var(--text-secondary); border-bottom: 1px solid var(--border-color); padding-bottom: 12px;"><span style="color: var(--green-deep); font-weight: 600;">02</span> &nbsp; Brand Guidelines</p>
+                <p style="font-size: 1rem; color: var(--text-secondary); border-bottom: 1px solid var(--border-color); padding-bottom: 12px;"><span style="color: var(--green-deep); font-weight: 600;">03</span> &nbsp; Brand Pitch</p>
+                <p style="font-size: 1rem; color: var(--text-secondary); border-bottom: 1px solid var(--border-color); padding-bottom: 12px;"><span style="color: var(--green-deep); font-weight: 600;">04</span> &nbsp; PrépaGo French</p>
+                <p style="font-size: 1rem; color: var(--text-secondary);"><span style="color: var(--green-deep); font-weight: 600;">05</span> &nbsp; PrépaGo Japanese</p>
+              </div>
+            </div>
+            <span class="book__page-number">00 / 07</span>
+            <span class="book__page-hint">Turn page</span>
+          </div>
+          <div class="book__page-back" style="background: url('assets/images/nature-cycle/cover.png') center/cover no-repeat;">
+            <div class="book__page-overlay"></div>
+            <div class="book__page-content">
+              <span class="book__page-tag">Figma &middot; UX Research</span>
+              <h3 class="book__page-title">Nature Cycle</h3>
+              <p class="book__page-desc">Cycle-aware skincare UX app. Led full UX lifecycle — persona research, IA, wireframes, and hi-fi HTML prototype.</p>
+              <a href="project-nature-cycle.html" class="btn btn--primary" style="margin-top: 12px; font-size: 0.85rem; padding: 8px 18px;">View Project <span class="btn__arrow">→</span></a>
+            </div>
+            <span class="book__page-number">01 / 07</span>
+          </div>
+        </div>
+
+        <!-- Page 2: Brand Guidelines / Brand Pitch -->
+        <div class="book__page" data-page="1">
+          <div class="book__page-front" style="background: url('assets/images/brand-guidelines/cover.png') right center/cover no-repeat;">
+            <div class="book__page-overlay"></div>
+            <div class="book__page-content">
+              <span class="book__page-tag">Illustrator &middot; Figma</span>
+              <h3 class="book__page-title">Brand Guidelines</h3>
+              <p class="book__page-desc">Complete brand identity system — logo design, color palette, typography, and mockup applications for Flexn.</p>
+              <a href="project-brand-guidelines.html" class="btn btn--primary" style="margin-top: 12px; font-size: 0.85rem; padding: 8px 18px;">View Project <span class="btn__arrow">→</span></a>
+            </div>
+            <span class="book__page-number">02 / 07</span>
+            <span class="book__page-hint">Turn page</span>
+          </div>
+          <div class="book__page-back" style="background: url('assets/images/brand-pitch/cover.png') left center/cover no-repeat;">
+            <div class="book__page-overlay"></div>
+            <div class="book__page-content">
+              <span class="book__page-tag">InDesign &middot; Brand Strategy</span>
+              <h3 class="book__page-title">Brand Pitch</h3>
+              <p class="book__page-desc">Roots × WWF campaign pitch — creative strategy, target audience analysis, SMART goals, and seasonal roadmap.</p>
+              <a href="project-brand-pitch.html" class="btn btn--primary" style="margin-top: 12px; font-size: 0.85rem; padding: 8px 18px;">View Project <span class="btn__arrow">→</span></a>
+            </div>
+            <span class="book__page-number">03 / 07</span>
+          </div>
+        </div>
+
+        <!-- Page 3: PrépaGo French / PrépaGo Japanese -->
+        <div class="book__page" data-page="2">
+          <div class="book__page-front" style="background: #728d5c; overflow: hidden;">
+            <video autoplay muted loop playsinline style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: 100%; object-fit: cover; opacity: 0.5;">
+              <source src="assets/images/pr%C3%A9pago/%E3%82%B7%E3%83%BC%E3%82%B1%E3%83%B3%E3%82%B9%2001.mp4" type="video/mp4">
+            </video>
+            <div class="book__page-overlay"></div>
+            <div class="book__page-content">
+              <span class="book__page-tag">Flutter &middot; Google Cloud TTS</span>
+              <h3 class="book__page-title">PrépaGo</h3>
+              <p class="book__page-desc">French DELF exam prep app for CEFR A1–B2 learners. Trilingual vocabulary dataset of 3,496 words. Published to App Store.</p>
+            </div>
+            <span class="book__page-number">04 / 07</span>
+            <span class="book__page-hint">Turn page</span>
+          </div>
+          <div class="book__page-back" style="background: url('assets/images/pr%C3%A9pago%20japanese/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-03-16%20%E5%8D%88%E5%89%8D1.24.37.png') center/cover no-repeat;">
+            <div class="book__page-overlay"></div>
+            <div class="book__page-content">
+              <span class="book__page-tag">Flutter &middot; Dart</span>
+              <h3 class="book__page-title">PrépaGo Japanese</h3>
+              <p class="book__page-desc">JLPT prep app aligned to N5–N1 levels. Frequency-ordered vocabulary, kanji practice, and grammar conjugation modules.</p>
+              <a href="project-prepago-japanese.html" class="btn btn--primary" style="margin-top: 12px; font-size: 0.85rem; padding: 8px 18px;">View Project <span class="btn__arrow">→</span></a>
+            </div>
+            <span class="book__page-number">05 / 07</span>
+          </div>
+        </div>
+
+        <!-- Page 4: End of Chapter -->
+        <div class="book__page" data-page="3">
+          <div class="book__page-front" style="background: var(--bg-secondary);">
+            <div class="book__page-content" style="width: 100%; text-align: center; align-self: center;">
+              <p style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--green-deep); margin-bottom: 16px;">End of Chapter</p>
+              <a href="about.html" class="btn btn--primary">About Me <span class="btn__arrow">→</span></a>
+            </div>
+            <span class="book__page-number">06 / 07</span>
+          </div>
+          <div class="book__page-back" style="background: var(--bg-secondary);"></div>
+        </div>
+        </div>
+      </div>
+
+      <!-- Book Navigation -->
+      <div class="book__nav">
+        <button class="book__nav-btn" id="book-prev" disabled aria-label="Previous page">←</button>
+        <div class="book__nav-dots" id="book-dots">
+          <div class="book__nav-dot active"></div>
+          <div class="book__nav-dot"></div>
+          <div class="book__nav-dot"></div>
+          <div class="book__nav-dot"></div>
+        </div>
+        <button class="book__nav-btn" id="book-next" aria-label="Next page">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__label">Expertise</span>
+        <h2 class="section__title">Skills &amp; Technologies</h2>
+      </div>
+      <div class="skills-grid stagger-children">
+        <div class="skill-item page-curl">
+          <div class="skill-item__header">
+            <span class="skill-item__name">UI/UX Design (Figma, Illustrator)</span>
+            <span class="skill-item__percent">90%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar__fill" data-value="90"></div>
+          </div>
+        </div>
+        <div class="skill-item page-curl">
+          <div class="skill-item__header">
+            <span class="skill-item__name">Flutter / Dart</span>
+            <span class="skill-item__percent">85%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar__fill" data-value="85"></div>
+          </div>
+        </div>
+        <div class="skill-item page-curl">
+          <div class="skill-item__header">
+            <span class="skill-item__name">HTML / CSS / JavaScript</span>
+            <span class="skill-item__percent">85%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar__fill" data-value="85"></div>
+          </div>
+        </div>
+        <div class="skill-item page-curl">
+          <div class="skill-item__header">
+            <span class="skill-item__name">Motion &amp; Media (AE, Premiere)</span>
+            <span class="skill-item__percent">80%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar__fill" data-value="80"></div>
+          </div>
+        </div>
+        <div class="skill-item page-curl">
+          <div class="skill-item__header">
+            <span class="skill-item__name">D3.js / Data Visualization</span>
+            <span class="skill-item__percent">75%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar__fill" data-value="75"></div>
+          </div>
+        </div>
+        <div class="skill-item page-curl">
+          <div class="skill-item__header">
+            <span class="skill-item__name">Unity 6 (C#) / 3D</span>
+            <span class="skill-item__percent">70%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar__fill" data-value="70"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__content">
+        <div class="footer__socials">
+          <a href="#" class="footer__social-link magnetic-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="#" class="footer__social-link magnetic-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="footer__social-link magnetic-btn" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="footer__social-link magnetic-btn" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <p class="footer__copy">&copy; 2025 Kiriha Aiga. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

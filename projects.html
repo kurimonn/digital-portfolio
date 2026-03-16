@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiriha Aiga — Projects</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Serif+4:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .page-hero {
+      padding: 160px 0 80px;
+      text-align: center;
+    }
+
+    .page-hero__title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      visibility: hidden;
+      color: var(--green-deep);
+    }
+
+    .page-hero__desc {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Filters */
+    .filters {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .filter-btn {
+      padding: 10px 24px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: all var(--transition-normal);
+    }
+
+    .filter-btn:hover {
+      color: var(--green-deep);
+      border-color: var(--border-hover);
+      background: var(--green-pale);
+    }
+
+    .filter-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 28px;
+    }
+
+    .project-card {
+      cursor: pointer;
+    }
+
+    .project-card .card__image {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: -0.02em;
+    }
+
+    .card-shine {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .card__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .card__year {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .card__link-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      transition: all var(--transition-fast);
+    }
+
+    .project-card:hover .card__link-icon {
+      border-color: var(--accent);
+      background: rgba(108, 99, 255, 0.1);
+    }
+
+    /* Modal custom */
+    .modal__header {
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 32px;
+      position: relative;
+    }
+
+    .modal__tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 8px;
+    }
+
+    .modal__title {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .modal__body {
+      padding: 32px;
+    }
+
+    .modal__desc {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .modal__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .modal__section-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .modal__features {
+      list-style: disc;
+      padding-left: 20px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 2;
+    }
+
+    .modal__actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor"></div>
+  <div class="cursor-dot"></div>
+  <div class="page-transition"></div>
+
+  <nav class="nav">
+    <a href="index.html" class="nav__logo"><img src="assets/images/logo/名称未設定-1.png" alt="Kiriha Aiga" class="nav__logo-img"><span class="nav__logo-text"><span>Kiriha</span><span>Aiga</span></span></a>
+    <div class="nav__links">
+      <a href="index.html" class="nav__link">Home</a>
+      <a href="projects.html" class="nav__link active">Projects</a>
+      <a href="design.html" class="nav__link">Design</a>
+      <a href="data.html" class="nav__link">Data</a>
+      <a href="about.html" class="nav__link">About</a>
+    </div>
+    <button class="nav__hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="nav__mobile-menu">
+    <a href="index.html" class="nav__link">Home</a>
+    <a href="projects.html" class="nav__link active">Projects</a>
+    <a href="design.html" class="nav__link">Design</a>
+    <a href="data.html" class="nav__link">Data</a>
+    <a href="about.html" class="nav__link">About</a>
+  </div>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="page-hero__title">Web Projects</h1>
+      <p class="page-hero__desc reveal">A collection of web applications and digital products I've designed and developed.</p>
+    </div>
+  </section>
+
+  <!-- Filters & Grid -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="filters reveal">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="mobile">Mobile App</button>
+        <button class="filter-btn" data-filter="ux">Design / UX</button>
+      </div>
+
+      <div class="projects-grid stagger-children">
+        <!-- Project 1: PrépaGo French -->
+        <div class="project-card card tilt-card page-curl card-hover-zoom" data-category="mobile" data-tags="Flutter, Dart, Google Cloud TTS, App Store" data-color="linear-gradient(135deg, #728d5c, #b5d4a0)">
+          <div class="card__image" style="background: linear-gradient(135deg, #728d5c, #b5d4a0);">
+            PrépaGo
+            <div class="card-shine"></div>
+          </div>
+          <div class="card__body">
+            <span class="card__tag">Mobile App</span>
+            <h3 class="card__title">PrépaGo — French DELF Prep</h3>
+            <p class="card__desc">French exam prep app for CEFR A1–B2 with a trilingual vocabulary dataset of 3,496 words and Google Cloud TTS integration. Published to App Store.</p>
+            <div class="card__footer">
+              <span class="card__year">2025</span>
+              <span class="card__link-icon">↗</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2: PrépaGo Japanese -->
+        <div class="project-card card tilt-card page-curl card-hover-zoom" data-category="mobile" data-tags="Flutter, Dart, JSON Dataset" data-color="linear-gradient(135deg, #4a6338, #637a4e)">
+          <div class="card__image" style="background: linear-gradient(135deg, #4a6338, #637a4e);">
+            PrépaGo JP
+            <div class="card-shine"></div>
+          </div>
+          <div class="card__body">
+            <span class="card__tag">Mobile App</span>
+            <h3 class="card__title">PrépaGo — Japanese JLPT Prep</h3>
+            <p class="card__desc">JLPT prep app for N5–N1 levels with frequency-ordered vocabulary, kanji practice, and grammar conjugation modules.</p>
+            <div class="card__footer">
+              <span class="card__year">2025</span>
+              <span class="card__link-icon">↗</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3: Nature Cycle -->
+        <a href="project-nature-cycle.html" class="project-card card tilt-card page-curl card-hover-zoom" data-category="ux" data-tags="Figma, UX Research, HTML Prototype, Persona" data-color="linear-gradient(135deg, #5a7248, #9ab888)">
+          <div class="card__image" style="background: linear-gradient(135deg, #5a7248, #9ab888);">
+            Nature Cycle
+            <div class="card-shine"></div>
+          </div>
+          <div class="card__body">
+            <span class="card__tag">UX Design</span>
+            <h3 class="card__title">Nature Cycle — Skincare UX App</h3>
+            <p class="card__desc">Cycle-aware skincare app. Led the full UX lifecycle — persona research, information architecture, wireframes, and hi-fi HTML prototype.</p>
+            <div class="card__footer">
+              <span class="card__year">2025</span>
+              <span class="card__link-icon">↗</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Project 4: Brand Guidelines (INM200SBB) -->
+        <a href="project-brand-guidelines.html" class="project-card card tilt-card page-curl card-hover-zoom" data-category="ux" data-tags="Illustrator, Figma, Brand Identity, Logo Design" data-color="linear-gradient(135deg, #7a8b69, #bdd4a5)">
+          <div class="card__image" style="background: linear-gradient(135deg, #7a8b69, #bdd4a5);">
+            Branding
+            <div class="card-shine"></div>
+          </div>
+          <div class="card__body">
+            <span class="card__tag">Design</span>
+            <h3 class="card__title">Brand Guidelines &amp; Logo Design</h3>
+            <p class="card__desc">Complete brand guidelines including logo design, color systems, typography, and mockup applications.</p>
+            <div class="card__footer">
+              <span class="card__year">2025</span>
+              <span class="card__link-icon">↗</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Project 5: Creative Brief & Execution (INM310 Assignment 3) -->
+        <a href="project-creative-brief.html" class="project-card card tilt-card page-curl card-hover-zoom" data-category="ux" data-tags="Creative Direction, Strategy, InDesign" data-color="linear-gradient(135deg, #3a5428, #728d5c)">
+          <div class="card__image" style="background: linear-gradient(135deg, #3a5428, #728d5c);">
+            Creative Brief
+            <div class="card-shine"></div>
+          </div>
+          <div class="card__body">
+            <span class="card__tag">Design</span>
+            <h3 class="card__title">Creative Brief &amp; Execution</h3>
+            <p class="card__desc">Strategic creative brief outlining concept development, target audience analysis, and design execution.</p>
+            <div class="card__footer">
+              <span class="card__year">2025</span>
+              <span class="card__link-icon">↗</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Project 6: Brand Pitch (INM310 Assignment 4) -->
+        <a href="project-brand-pitch.html" class="project-card card tilt-card page-curl card-hover-zoom" data-category="ux" data-tags="Branding, Pitch, Presentation, Strategy" data-color="linear-gradient(135deg, #637a4e, #d0e4be)">
+          <div class="card__image" style="background: linear-gradient(135deg, #637a4e, #d0e4be);">
+            The Pitch
+            <div class="card-shine"></div>
+          </div>
+          <div class="card__body">
+            <span class="card__tag">Design</span>
+            <h3 class="card__title">Brand Pitch Presentation</h3>
+            <p class="card__desc">Brand strategy pitch deck presenting the creative vision, identity system, and campaign direction.</p>
+            <div class="card__footer">
+              <span class="card__year">2025</span>
+              <span class="card__link-icon">↗</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal-overlay">
+    <div class="modal">
+      <button class="modal__close">✕</button>
+      <div class="modal__header">
+        <span class="modal__tag"></span>
+        <h2 class="modal__title"></h2>
+      </div>
+      <div class="modal__body">
+        <p class="modal__desc"></p>
+        <h4 class="modal__section-title">Technologies</h4>
+        <div class="modal__tags"></div>
+        <h4 class="modal__section-title">Key Features</h4>
+        <ul class="modal__features">
+          <li>Responsive design across all devices</li>
+          <li>Modern UI with smooth animations</li>
+          <li>Optimized performance and SEO</li>
+          <li>Clean, maintainable codebase</li>
+        </ul>
+        <div class="modal__actions">
+          <a href="#" class="btn btn--primary ink-spread btn-shine">Live Demo ↗</a>
+          <a href="#" class="btn btn--outline ink-spread">Source Code</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__content">
+        <div class="footer__socials">
+          <a href="https://github.com/kurimon" class="footer__social-link magnetic-btn" target="_blank"><i class="fa-brands fa-github"></i></a>
+          <a href="#" class="footer__social-link magnetic-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="footer__social-link magnetic-btn"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="mailto:kaiga@myseneca.ca" class="footer__social-link magnetic-btn"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <p class="footer__copy">&copy; 2025 Kiriha Aiga. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/projects.js"></script>
+</body>
+</html>
