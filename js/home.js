@@ -117,9 +117,10 @@ function initHeroAnimation() {
 
   const tl = gsap.timeline({ delay: 0.5 });
 
-  // 1. Book cover flips open (upward)
+  // 1. Book cover flips open
+  const isMobile = window.innerWidth <= 768;
   tl.to(cover, {
-    rotateY: -160,
+    [isMobile ? 'rotateX' : 'rotateY']: isMobile ? -160 : -160,
     duration: 1.8,
     ease: 'power3.inOut'
   });
