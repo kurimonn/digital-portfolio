@@ -693,8 +693,7 @@
     @media (max-width: 768px) {
       .hero {
         min-height: 100vh;
-        align-items: flex-end;
-        padding-bottom: 100px;
+        align-items: center;
       }
       .hero-book {
         width: 90vw;
@@ -702,9 +701,9 @@
         height: 340px;
         margin-left: 0;
       }
-      .hero-book__cover { width: 100%; transform-origin: center top; }
-      .hero-book__cover-front { border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
-      .hero-book__cover-back { border-radius: 12px; transform: rotateX(180deg); }
+      .hero-book__cover { width: 100%; transform-origin: left center; }
+      .hero-book__cover-front { border-radius: 12px; box-shadow: 4px 0 20px rgba(0,0,0,0.15); }
+      .hero-book__cover-back { border-radius: 12px; transform: rotateY(180deg); }
       .hero-book__pages { border-radius: 12px; }
       .hero-book__cover-logo { width: 50px; }
       .hero-book__page-content { padding: 20px 16px; }
