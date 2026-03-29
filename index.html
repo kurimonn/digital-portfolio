@@ -715,10 +715,10 @@
       .scroll-indicator { bottom: 16px; }
       .book-wrapper { height: 380px; }
       .book { position: relative; left: auto; width: 100%; height: 380px; }
-      .book__page { transform-origin: center top; }
-      .book__page.flipped { transform: rotateX(-180deg); }
+      .book__page { transform-origin: left center; }
+      .book__page.flipped { transform: rotateY(-180deg); }
       .book__page-front { border-radius: var(--radius-lg); }
-      .book__page-back { transform: rotateX(180deg); border-radius: var(--radius-lg); }
+      .book__page-back { transform: rotateY(180deg); border-radius: var(--radius-lg); }
       .book__page-front, .book__page-back { padding: 20px; }
       .book__spine { display: none; }
     }
