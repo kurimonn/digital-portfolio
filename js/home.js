@@ -161,15 +161,28 @@ function initHeroAnimation() {
 // Book Page Flip
 // ===========================
 function initBookFlip() {
-  const book = document.getElementById('project-book');
+  const isMobile = window.innerWidth <= 768;
+  const book = isMobile
+    ? document.getElementById('project-book-mobile')
+    : document.getElementById('project-book');
   if (!book) return;
 
   const pages = book.querySelectorAll('.book__page');
   const prevBtn = document.getElementById('book-prev');
   const nextBtn = document.getElementById('book-next');
-  const dots = document.querySelectorAll('.book__nav-dot');
+  const dotsContainer = document.getElementById('book-dots');
   let currentPage = 0;
   const totalPages = pages.length;
+
+  // Generate nav dots dynamically based on active book
+  dotsContainer.innerHTML = '';
+  for (let i = 0; i < totalPages; i++) {
+    const dot = document.createElement('div');
+    dot.classList.add('book__nav-dot');
+    if (i === 0) dot.classList.add('active');
+    dotsContainer.appendChild(dot);
+  }
+  const dots = dotsContainer.querySelectorAll('.book__nav-dot');
 
   // Set initial z-index stacking (last page on bottom)
   pages.forEach((page, i) => {
@@ -189,7 +202,6 @@ function initBookFlip() {
     pages.forEach((page, i) => {
       const front = page.querySelector('.book__page-front');
       if (i >= currentPage && !page.classList.contains('flipped')) {
-        // Only the current top page front is clickable
         front.style.pointerEvents = (i === currentPage) ? 'auto' : 'none';
       } else {
         front.style.pointerEvents = 'none';
@@ -232,9 +244,7 @@ function initBookFlip() {
   // Click on page to flip forward
   pages.forEach((page, i) => {
     page.addEventListener('click', (e) => {
-      // Don't flip if clicking a link or button
       if (e.target.closest('a, button')) return;
-      // Only flip if this is the current top page
       if (i === currentPage) {
         flipForward();
       }
@@ -243,7 +253,6 @@ function initBookFlip() {
 
   // Keyboard navigation
   document.addEventListener('keydown', (e) => {
-    // Only respond if book is in viewport
     const rect = book.getBoundingClientRect();
     const inView = rect.top < window.innerHeight && rect.bottom > 0;
     if (!inView) return;
