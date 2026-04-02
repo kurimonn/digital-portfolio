@@ -4,7 +4,9 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   // initParticles(); // Removed — using CSS wave animation instead
+  initHeroSlideshow();
   initHeroAnimation();
+  initHeroParallax();
   initBookFlip();
   initSkillBars();
   initCategoryCards();
@@ -111,47 +113,78 @@ function initParticles() {
 // ===========================
 // Hero Animation
 // ===========================
+// ===========================
+// Hero Slideshow (Ken Burns)
+// ===========================
+function initHeroSlideshow() {
+  const slides = document.querySelectorAll('.hero__slide');
+  if (slides.length < 2) return;
+
+  let current = 0;
+  const interval = 8000; // 8 seconds per slide
+
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, interval);
+}
+
+// ===========================
+// Hero Animation
+// ===========================
+// ===========================
+// Hero Parallax Fade on Scroll
+// ===========================
+function initHeroParallax() {
+  const content = document.querySelector('.hero__content');
+  if (!content) return;
+
+  gsap.to(content, {
+    opacity: 0,
+    y: -60,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true
+    }
+  });
+}
+
 function initHeroAnimation() {
-  const cover = document.querySelector('.hero-book__cover');
-  if (!cover) return;
+  const content = document.querySelector('.hero__content');
+  if (!content) return;
 
-  const tl = gsap.timeline({ delay: 0.5 });
+  const tl = gsap.timeline({ delay: 0.3 });
 
-  // 1. Book cover flips open
-  const isMobile = window.innerWidth <= 768;
-  tl.to(cover, isMobile
-    ? { rotateX: -160, duration: 1.8, ease: 'power3.inOut' }
-    : { rotateY: -160, duration: 1.8, ease: 'power3.inOut' }
-  );
+  // 1. Avatar
+  tl.from('.hero__avatar', {
+    opacity: 0, scale: 0.8, duration: 0.8, ease: 'back.out(1.5)'
+  });
 
-  // 2. Page content fades in
-  tl.to('.hero-book__page-content', {
-    opacity: 1,
-    duration: 0.6,
-    ease: 'power2.out'
-  }, '-=0.4');
-
-  // 3. Label
+  // 2. Label
   tl.from('.hero__label', {
     opacity: 0, y: 15, duration: 0.6, ease: 'power2.out'
   }, '-=0.3');
 
-  // 4. Title
+  // 3. Title
   tl.from('.hero__title', {
     opacity: 0, y: 20, duration: 0.8, ease: 'power3.out'
   }, '-=0.2');
 
-  // 5. Subtitle
+  // 4. Subtitle
   tl.from('.hero__subtitle', {
     opacity: 0, y: 20, duration: 0.7, ease: 'power2.out'
   }, '-=0.3');
 
-  // 6. CTA buttons
+  // 5. CTA buttons
   tl.from('.hero__cta', {
     opacity: 0, y: 15, duration: 0.6, ease: 'power2.out'
   }, '-=0.2');
 
-  // 7. Scroll indicator
+  // 6. Scroll indicator
   tl.from('.scroll-indicator', {
     opacity: 0, duration: 0.8, ease: 'power2.out'
   }, '-=0.2');
